@@ -1,1 +1,0 @@
-echo "Hello I'm magic script"

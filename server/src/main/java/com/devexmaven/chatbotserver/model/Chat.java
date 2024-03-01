@@ -11,8 +11,41 @@ public class Chat {
     private Integer chatId;
     @JsonProperty("Query")
     @Column(nullable = false)
-    private String userQuery;
+    private String query;
     @JsonProperty("Answer")
     @Column(nullable = false)
-    private String chatbotAnswer;
+    private String answer;
+
+    public Chat() {
+    }
+
+    public Chat(Integer chatId, String query, String answer) {
+        this.chatId = chatId;
+        this.query = query;
+        this.answer = answer;
+    }
+
+    public Integer getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Integer chatId) {
+        this.chatId = chatId;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }
