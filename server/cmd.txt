@@ -1,0 +1,3 @@
+Postgresql:
+
+docker run --name chatbot_db -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -e POSTGRES_DB=chatbot_db -d postgres
