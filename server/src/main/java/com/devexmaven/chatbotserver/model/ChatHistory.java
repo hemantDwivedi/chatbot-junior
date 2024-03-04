@@ -9,6 +9,8 @@ import java.util.List;
 public class ChatHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ch_id")
+    @JsonProperty("ChatHistoryId")
     private Integer chatHistoryId;
 
     @JsonProperty("UserFirstQuery")
@@ -16,7 +18,8 @@ public class ChatHistory {
     private String userFirstQuery;
 
     @JsonProperty("Chats")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(nullable = false)
     private List<Chat> chats;
 
     public ChatHistory() {

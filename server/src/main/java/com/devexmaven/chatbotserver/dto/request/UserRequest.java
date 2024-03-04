@@ -1,42 +1,16 @@
-package com.devexmaven.chatbotserver.model;
+package com.devexmaven.chatbotserver.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-
-import java.util.List;
-
-@Entity
-@Table(name = "users_tb")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+public class UserRequest {
     private String firstName;
     private String lastName;
-    @Column(unique = true, nullable = false)
     private String email;
-    @Column(unique = true, nullable = false)
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ChatHistory> chatHistories;
 
-    public User() {
-    }
-
-    public User(Long userId, String firstName, String lastName, String email, String password) {
-        this.userId = userId;
+    public UserRequest(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {

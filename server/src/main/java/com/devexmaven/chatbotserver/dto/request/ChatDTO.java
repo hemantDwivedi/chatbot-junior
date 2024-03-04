@@ -1,26 +1,21 @@
-package com.devexmaven.chatbotserver.model;
+package com.devexmaven.chatbotserver.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
-@Entity
-public class Chat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ChatDTO {
+
     @JsonProperty("ChatId")
-    @Column(name = "chat_id")
     private Integer chatId;
     @JsonProperty("Query")
-    @Column(nullable = false)
     private String query;
     @JsonProperty("Answer")
-    @Column(nullable = false)
     private String answer;
 
-    public Chat() {
+    public ChatDTO() {
     }
 
-    public Chat(Integer chatId, String query, String answer) {
+    public ChatDTO(Integer chatId, String query, String answer) {
         this.chatId = chatId;
         this.query = query;
         this.answer = answer;
