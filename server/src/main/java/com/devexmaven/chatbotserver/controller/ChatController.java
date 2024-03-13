@@ -1,6 +1,7 @@
 package com.devexmaven.chatbotserver.controller;
 
-import com.devexmaven.chatbotserver.dto.request.ChatDTO;
+import com.devexmaven.chatbotserver.dto.request.ChatQuery;
+import com.devexmaven.chatbotserver.model.Chat;
 import com.devexmaven.chatbotserver.service.IChatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class ChatController {
     }
 
     @PostMapping
-    public ResponseEntity<ChatDTO> createChat(@RequestBody ChatDTO chatDTO){
-        return new ResponseEntity<>(chatService.createChat(chatDTO), HttpStatus.CREATED);
+    public ResponseEntity<Chat> createChat(@RequestBody ChatQuery chatQuery){
+        return new ResponseEntity<>(chatService.createChat(chatQuery), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<ChatDTO>> getAllChats(){
+    public ResponseEntity<List<ChatQuery>> getAllChats(){
         return new ResponseEntity<>(chatService.getAllChats(), HttpStatus.OK);
     }
 }

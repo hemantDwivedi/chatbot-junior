@@ -1,6 +1,6 @@
 package com.devexmaven.chatbotserver.utils;
 
-import com.devexmaven.chatbotserver.dto.request.ChatDTO;
+import com.devexmaven.chatbotserver.dto.request.ChatQuery;
 import com.devexmaven.chatbotserver.dto.request.UserRequest;
 import com.devexmaven.chatbotserver.dto.response.ChatHistoryDTO;
 import com.devexmaven.chatbotserver.dto.response.UserResponse;
@@ -21,8 +21,8 @@ public interface MapperHelper {
     UserResponse userToUserResponse(User user);
     User updateEntity(@MappingTarget User user, UserRequest userRequest);
 
-    Chat chatDtoToChat(ChatDTO chatDTO);
-    ChatDTO chatToChatDto(Chat chat);
+    Chat chatDtoToChat(ChatQuery chatQuery);
+    ChatQuery chatToChatDto(Chat chat);
 
     ChatHistory chatHistoryDtoToChatHistory(ChatHistoryDTO chatHistoryDTO);
     ChatHistoryDTO chatHistoryToChatHistoryDto(ChatHistory chatHistory);

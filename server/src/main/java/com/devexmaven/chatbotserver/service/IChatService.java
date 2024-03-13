@@ -1,10 +1,11 @@
 package com.devexmaven.chatbotserver.service;
 
-import com.devexmaven.chatbotserver.dto.request.ChatDTO;
+import com.devexmaven.chatbotserver.dto.request.ChatQuery;
+import com.devexmaven.chatbotserver.model.Chat;
 
 import java.util.List;
 
 public interface IChatService {
-    ChatDTO createChat(ChatDTO chatDTO);
-    List<ChatDTO> getAllChats();
+    Chat createChat(ChatQuery chatQuery);
+    List<ChatQuery> getAllChats();
 }

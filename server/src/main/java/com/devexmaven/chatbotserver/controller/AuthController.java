@@ -19,8 +19,8 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/sign-in")
-    public ResponseEntity<UserResponse> signInUser(@RequestBody UserRequest userRequest){
+    @PostMapping("/signup")
+    public ResponseEntity<UserResponse> signUp(@RequestBody UserRequest userRequest){
         return new ResponseEntity<>(authService.createUser(userRequest), HttpStatus.CREATED);
     }
 }
