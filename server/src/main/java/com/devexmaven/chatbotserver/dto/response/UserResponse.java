@@ -1,34 +1,31 @@
-package com.devexmaven.chatbotserver.model;
+package com.devexmaven.chatbotserver.dto.response;
 
+import com.devexmaven.chatbotserver.model.ChatHistory;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
-@Table(name = "users_tb")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserResponse {
+    @JsonProperty("UserId")
     private Long userId;
+    @JsonProperty("FirstName")
     private String firstName;
+    @JsonProperty("LastName")
     private String lastName;
-    @Column(unique = true, nullable = false)
+    @JsonProperty("Email")
     private String email;
-    @Column(unique = true, nullable = false)
-    private String password;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonProperty("ChatHistory")
     private List<ChatHistory> chatHistories;
 
-    public User() {
+    public UserResponse() {
     }
 
-    public User(Long userId, String firstName, String lastName, String email, String password) {
+    public UserResponse(Long userId, String firstName, String lastName, String email, List<ChatHistory> chatHistories) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.chatHistories = chatHistories;
     }
 
     public Long getUserId() {
@@ -63,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public List<ChatHistory> getChatHistories() {
+        return chatHistories;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setChatHistories(List<ChatHistory> chatHistories) {
+        this.chatHistories = chatHistories;
     }
 }

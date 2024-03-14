@@ -8,6 +8,7 @@ public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("ChatId")
+    @Column(name = "chat_id")
     private Integer chatId;
     @JsonProperty("Query")
     @Column(nullable = false)
