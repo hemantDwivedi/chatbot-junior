@@ -14,7 +14,7 @@ const ChatHistory = () => {
                 <div className="py-3 border-b border-violet-950 px-2">Chat history 2</div>
                 <div className="py-3 border-b border-violet-950 px-2">Chat history 3</div>
             </div>
-            <div className="border-t sticky border-violet-950 px-2 py-3 bottom-0">
+            <div className="border-t sticky bg-neutral-950 text-center border-violet-950 py-2 bottom-0">
                 <Header />
             </div>
         </div>
