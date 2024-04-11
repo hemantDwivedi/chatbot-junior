@@ -2,7 +2,7 @@ const UserProfile = () => {
     return (
         <div className="">
             <div className="container text-lg">
-               User profile
+               Hemant Kumar
             </div>
         </div>
     )
