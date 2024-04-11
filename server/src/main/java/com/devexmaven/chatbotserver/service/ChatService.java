@@ -30,9 +30,9 @@ public class ChatService implements IChatService{
         Chat chat = new Chat();
         chat.setQuery(chatQuery.getQuery());
         chat.setAnswer(openaiAnswer);
-        Chat savedChat = chatRepository.save(chat);
-        return savedChat;
-//        return chat;
+//        Chat savedChat = chatRepository.save(chat);
+//        return savedChat;
+        return chat;
     }
 
     @Override
