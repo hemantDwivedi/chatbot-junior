@@ -2,10 +2,19 @@ package com.devexmaven.chatbotserver.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Table(name = "chat_histories")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChatHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,37 +30,4 @@ public class ChatHistory {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Column(nullable = false)
     private List<Chat> chats;
-
-    public ChatHistory() {
-    }
-
-    public ChatHistory(Integer chatHistoryId, String userFirstQuery, List<Chat> chats) {
-        this.chatHistoryId = chatHistoryId;
-        this.userFirstQuery = userFirstQuery;
-        this.chats = chats;
-    }
-
-    public Integer getChatHistoryId() {
-        return chatHistoryId;
-    }
-
-    public void setChatHistoryId(Integer chatHistoryId) {
-        this.chatHistoryId = chatHistoryId;
-    }
-
-    public String getUserFirstQuery() {
-        return userFirstQuery;
-    }
-
-    public void setUserFirstQuery(String userFirstQuery) {
-        this.userFirstQuery = userFirstQuery;
-    }
-
-    public List<Chat> getChats() {
-        return chats;
-    }
-
-    public void setChats(List<Chat> chats) {
-        this.chats = chats;
-    }
 }

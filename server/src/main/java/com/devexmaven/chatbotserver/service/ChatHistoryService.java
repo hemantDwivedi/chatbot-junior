@@ -7,22 +7,18 @@ import com.devexmaven.chatbotserver.model.ChatHistory;
 import com.devexmaven.chatbotserver.repository.ChatHistoryRepository;
 import com.devexmaven.chatbotserver.repository.ChatRepository;
 import com.devexmaven.chatbotserver.utils.MapperHelper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ChatHistoryService implements IChatHistoryService {
     private final ChatHistoryRepository chatHistoryRepository;
     private final ChatRepository chatRepository;
     private final MapperHelper mapperHelper;
-
-    public ChatHistoryService(ChatHistoryRepository chatHistoryRepository, ChatRepository chatRepository, MapperHelper mapperHelper) {
-        this.chatHistoryRepository = chatHistoryRepository;
-        this.chatRepository = chatRepository;
-        this.mapperHelper = mapperHelper;
-    }
 
     @Override
     public ChatHistoryDTO createChatHistory(Integer chatId) {
