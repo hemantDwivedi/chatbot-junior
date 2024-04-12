@@ -5,19 +5,17 @@ import com.devexmaven.chatbotserver.dto.response.UserResponse;
 import com.devexmaven.chatbotserver.model.User;
 import com.devexmaven.chatbotserver.repository.UserRepository;
 import com.devexmaven.chatbotserver.utils.MapperHelper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AuthService implements IAuthService{
-    private final UserRepository userRepository;
-    private final MapperHelper mapper;
-
-    public AuthService(UserRepository userRepository, MapperHelper mapper) {
-        this.userRepository = userRepository;
-        this.mapper = mapper;
-    }
+    private UserRepository userRepository;
+    private MapperHelper mapper;
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
@@ -36,6 +34,6 @@ public class AuthService implements IAuthService{
 
     @Override
     public List<UserResponse> getAllUsers() {
-        return null;
+        return Collections.emptyList();
     }
 }
