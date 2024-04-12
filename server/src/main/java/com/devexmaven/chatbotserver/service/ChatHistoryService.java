@@ -22,13 +22,12 @@ public class ChatHistoryService implements IChatHistoryService {
 
     @Override
     public ChatHistoryDTO createChatHistory(Integer chatId) {
-        ChatHistory chatHistory = new ChatHistory();
         Chat chat = chatRepository.findById(chatId)
                 .orElseThrow(() -> new ResourceNotFoundException("Chat not found with ID:" + chatId));
         ArrayList<Chat> chats = new ArrayList<>();
         chats.add(chat);
-        chatHistory.setChats(chats);
-        chatHistory.setUserFirstQuery(chat.getQuery());
+
+        ChatHistory chatHistory = ChatHistory.builder().chats(chats).userFirstQuery(chat.getQuery()).build();
         ChatHistory savedHistory = chatHistoryRepository.save((chatHistory));
         return mapperHelper.chatHistoryToChatHistoryDto(savedHistory);
     }
