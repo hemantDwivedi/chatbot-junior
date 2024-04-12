@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/chats")
 public class ChatController {
+
     private final IChatService chatService;
 
     public ChatController(IChatService chatService) {
@@ -19,6 +20,7 @@ public class ChatController {
     }
 
     @PostMapping
+
     public ResponseEntity<Chat> createChat(@RequestBody ChatQuery chatQuery){
         return new ResponseEntity<>(chatService.createChat(chatQuery), HttpStatus.CREATED);
     }
