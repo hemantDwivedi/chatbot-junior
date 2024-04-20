@@ -2,8 +2,6 @@ package com.devexmaven.chatbotserver.controller;
 
 import com.devexmaven.chatbotserver.dto.response.ChatHistoryDTO;
 import com.devexmaven.chatbotserver.service.IChatHistoryService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +10,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/chats/histories")
-@RequiredArgsConstructor
 public class ChatHistoryController {
-    private IChatHistoryService chatHistoryService;
+    private final IChatHistoryService chatHistoryService;
+
+    public ChatHistoryController(IChatHistoryService chatHistoryService) {
+        this.chatHistoryService = chatHistoryService;
+    }
 
     @PostMapping
     public ResponseEntity<ChatHistoryDTO> createChatHistory(@RequestParam Integer chatId){

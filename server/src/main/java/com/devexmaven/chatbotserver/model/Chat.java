@@ -1,6 +1,5 @@
 package com.devexmaven.chatbotserver.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +14,6 @@ import lombok.*;
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     @Column(name = "chat_id")
     private Integer chatId;
     @JsonProperty("Query")

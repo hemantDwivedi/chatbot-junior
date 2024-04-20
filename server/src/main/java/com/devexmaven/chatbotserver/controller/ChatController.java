@@ -23,7 +23,7 @@ public class ChatController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ChatQuery>> getAllChats(){
+    public ResponseEntity<List<Chat>> getAllChats(){
         return new ResponseEntity<>(chatService.getAllChats(), HttpStatus.OK);
     }
 }

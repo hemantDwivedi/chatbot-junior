@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IChatService {
     Chat createChat(ChatQuery chatQuery);
-    List<ChatQuery> getAllChats();
+    List<Chat> getAllChats();
 }

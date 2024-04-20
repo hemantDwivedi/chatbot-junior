@@ -3,15 +3,14 @@ package com.devexmaven.chatbotserver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class ChatbotServerApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(ChatbotServerApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean
@@ -22,7 +21,7 @@ public class ChatbotServerApplication {
                 registry
                         .addMapping("/**")
                         .allowedMethods("*")
-                        .allowedOrigins("http://localhost:3000");
+                        .allowedOrigins("*");
             }
         };
     }

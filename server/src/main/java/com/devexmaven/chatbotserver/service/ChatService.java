@@ -22,20 +22,23 @@ public class ChatService implements IChatService{
     @Override
     public Chat createChat(ChatQuery chatQuery) {
 
-        Prompt prompt = new Prompt(chatQuery.getQuery());
-        String content = chatClient.call(prompt).getResult().getOutput().getContent();
+//        Prompt prompt = new Prompt(chatQuery.getQuery());
+//        String content = chatClient.call(prompt).getResult().getOutput().getContent();
 
+        String content = "AI answer.";
         Chat chat = Chat.builder().query(chatQuery.getQuery()).answer(content).build();
+
+        chatRepository.save(chat);
 
         return chat;
     }
 
     @Override
-    public List<ChatQuery> getAllChats() {
+    public List<Chat> getAllChats() {
         return chatRepository
-                .findAll()
-                .stream()
-                .map(chat -> mapper.chatToChatDto(chat))
-                .collect(Collectors.toList());
+                .findAll();
+//                .stream()
+//                .map(mapper::chatToChatDto)
+//                .toList();
     }
 }
