@@ -2,7 +2,7 @@
 
 <p id="description">An AI-powered chatbot assistant that interacts with users in natural language.</p>
 
-<p align="center"><img src="https://img.shields.io/github/commit-activity/w/hemantDwivedi/chatbot-junior" alt="shields"><img src="https://img.shields.io/github/created-at/hemantDwivedi/chatbot-junior" alt="shields"><img src="https://img.shields.io/github/languages/code-size/hemantDwivedi/chatbot-junior" alt="shields"></p>
+<p align="center"><img src="https://img.shields.io/github/commit-activity/y/hemantDwivedi/chatbot-junior" alt="shields"><img src="https://img.shields.io/github/created-at/hemantDwivedi/chatbot-junior" alt="shields"><img src="https://img.shields.io/github/languages/code-size/hemantDwivedi/chatbot-junior" alt="shields"></p>
 
   
   
