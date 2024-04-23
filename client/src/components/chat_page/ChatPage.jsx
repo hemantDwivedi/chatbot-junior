@@ -1,21 +1,45 @@
-import { useState } from "react";
+import 'regenerator-runtime/runtime'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { useEffect, useState } from "react";
 import ChatHistory from "../chat_history/ChatHistory";
-import { chatWithAi } from "../../service/ChatApi";
+import { allChatsApi, chatWithAi } from "../../service/ChatApi";
 
 const ChatPage = () => {
 
-    const [userQuery, setUserQuery] = useState('')
+    const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' })
+    const { transcript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition()
+    const { resetTranscript } = useSpeechRecognition()
+
+
+    if (!browserSupportsSpeechRecognition) {
+        return null
+    }
+
     const [query, setQuery] = useState('')
     const [chatbotAnswer, setChatbotAnswer] = useState('')
+    const [chats, setChats] = useState()
 
-    const handleUserQuery = () => {
-        setQuery(userQuery);
-        setUserQuery('')
+    useEffect(() => {
+        allChatsApi()
+            .then(response => setChats(response.data))
+            .catch(error => console.error(error))
+    }, [])
+
+
+    function handleUserQuery() {
+
+        if (transcript.trim == '') console.log('empty');
+
+        console.log("chats", chats);
+
+        setQuery(transcript);
         console.log(query);
-        callChatApi(userQuery)
+        callChatApi(transcript)
     }
 
     function callChatApi(Query) {
+        console.log(Query);
+
         chatWithAi({ Query })
             .then(response => setChatbotAnswer(response.data.Answer))
             // .then(response => console.log(response.data.Answer))
@@ -24,9 +48,8 @@ const ChatPage = () => {
 
     return (
         <div>
-            <div className="flex h-screen bg-neutral-950 text-violet-800">
-                <div className="w-1/5">
-                    <ChatHistory />
+            <div className="flex h-screen bg-neutral-950 text-white">
+                <div className="">
                 </div>
                 <div className="flex-1 flex flex-col">
                     <header className="text-gray-600 py-4 px-6 flex justify-end">
@@ -35,36 +58,32 @@ const ChatPage = () => {
                         </button>
                     </header>
                     <main className="flex-1 p-4">
+                        {
+                            chats === 0 &&
+                            <div className="uppercase text-gray-800 font-bold content-center grid justify-center text-4xl h-full">
+                                chatbot junior
+                                <p className="text-sm capitalize text-center">How can I assist you today?</p>
+                            </div>
+                        }
                         <div className="flex flex-col h-full max-w-3xl mx-auto">
-                            {
-                                query.length == 0 &&
-                                <div className="uppercase text-gray-800 font-bold content-center grid justify-center text-4xl h-full">
-                                    chatbot junior
-                                    <p className="text-sm capitalize text-center">How can I assist you today?</p>
+                            {/* {
+                                chats.map((chat) => (
+                                    <><div>
+                                        chat.Query
+                                    </div>
+                                        <div>
+                                            chat.Answer
+                                        </div>
+                                    </>
+                                ))
+                            } */}
+                            {/* <div className="overflow-y-auto flex-1">
+                                <div className="flex gap-3 mb-2">
+                                    <img className="w-8 h-8 my-auto" src="https://img.icons8.com/nolan/64/user.png" alt="user" />
+                                    <div className="py-2 max-w-2xl">
+                                        {query}
+                                    </div>
                                 </div>
-                            }
-                            <div className="overflow-y-auto flex-1">
-                                {
-                                    query.length != 0 &&
-                                    <div className="flex gap-3 mb-2">
-                                        <img className="w-8 h-8 my-auto" src="https://img.icons8.com/nolan/64/user.png" alt="user" />
-                                        <div className="py-2 max-w-2xl">
-                                            {query}
-                                        </div>
-                                    </div>
-                                }
-                                {/* {
-                                    query.length != 0 && chatbotAnswer.length == 0 &&
-                                    <div className="animate-pulse flex space-x-4">
-                                        <div className="flex-1 space-y-6 py-1">
-                                            <div className="h-2 bg-slate-700 rounded"></div>
-                                            <div className="h-2 bg-slate-700 rounded"></div>
-                                            <div className="h-2 bg-slate-700 rounded"></div>
-                                            <div className="h-2 bg-slate-700 rounded"></div>
-                                            <div className="h-2 bg-slate-700 rounded"></div>
-                                        </div>
-                                    </div>
-                                } */}
                                 <div className="flex my-3 gap-3">
                                     <img
                                         src="https://img.icons8.com/nolan/64/artificial-intelligence.png"
@@ -75,38 +94,30 @@ const ChatPage = () => {
                                         {
                                             chatbotAnswer
                                         }
-                                        {/* {
-                                            (chatbotAnswer.length == 0) ?
-                                                <div className="animate-pulse flex space-x-4 min-w-2xl">
-                                                    <div className="flex-1 space-y-6 py-1">
-                                                        <div className="h-2 bg-gray-900 rounded"></div>
-                                                        <div className="h-2 bg-gray-900 rounded"></div>
-                                                        <div className="h-2 bg-gray-900 rounded"></div>
-                                                        <div className="h-2 bg-gray-900 rounded"></div>
-                                                    </div>
-                                                </div>
-                                                :
-                                                { chatbotAnswer }
-                                        } */}
                                     </div>
                                 </div>
-                            </div>
-                            <div className="flex items-center border-2 border-gray-800 rounded-full px-3 py-2 mb-5">
-                                <input
-                                    type="text"
-                                    placeholder="Message Chatbot"
-                                    className="flex-1 p-2 outline-none bg-transparent placeholder:text-gray-600"
-                                    value={userQuery}
-                                    onChange={(e) => setUserQuery(e.target.value)}
-                                />
+                            </div> */}
+                            <div className="flex justify-center gap-5 mb-5">
                                 <button
-                                    className="ml-2 bg-zinc-800 hover:bg-violet-800 hover:text-gray-900 text-gray-600 rounded-full p-2 transition duration-300"
-                                    onClick={handleUserQuery}
+                                    className="bg-white py-2 px-4 rounded-lg text-black"
+                                    onClick={startListening}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                                        <path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z" clipRule="evenodd" />
-                                    </svg>
+                                    {
+                                        listening ? 'Listening' : 'Start a Microphone'
+                                    }
                                 </button>
+                                <button
+                                    className="bg-white py-2 px-4 rounded-lg text-red-600"
+                                    onClick={() => {
+                                        SpeechRecognition.stopListening()
+                                        handleUserQuery()
+                                    }
+                                    }
+                                >Stop</button>
+                                <button
+                                    className="bg-white py-2 px-4 rounded-lg text-red-600"
+                                    onClick={resetTranscript}
+                                >Cancel</button>
                             </div>
                         </div>
                     </main>
